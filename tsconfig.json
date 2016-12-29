@@ -12,7 +12,6 @@
     "diagnostics": true
   },
   "files": [
-    "./src/main.ts",
-    "./typings/index.d.ts"
+    "./src/main.ts"
   ]
 }
