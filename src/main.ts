@@ -5,7 +5,7 @@ import pageXY from './interfaces/xy';
 import Drawing from './enums/drawing';
 
 class DrawingPad {
-    private static toXY(stream: {a: MouseEvent, b: Drawing}): pageXY
+    private toXY(stream: {a: MouseEvent, b: Drawing}): pageXY
     {
         let {a, b} = stream;
         switch (b)
@@ -16,8 +16,8 @@ class DrawingPad {
                 return {x: a.pageX, y: a.pageY};
         }
     }
-    public static main(initial : Coords = {x0: 0, y0: 0, x1: 0, y1: 0},
-                       canvasId: string = 'trigger') : void
+    constructor(canvasId: string = 'trigger',
+                initial : Coords = {x0: 0, y0: 0, x1: 0, y1: 0})
     {
         Transaction.run(() => {
 
@@ -33,7 +33,7 @@ class DrawingPad {
 
             const sDelta: Stream<pageXY> = sMouseOver
                   .snapshot(sToggleDraw.hold(Drawing.END), (a: MouseEvent, b: Drawing) => ({a, b}))
-                  .map(DrawingPad.toXY);
+                  .map(this.toXY);
 
             const cLoop = new CellLoop();
             const sLines = sDelta.snapshot(cLoop, (e: MouseEvent, previous: Coords) => {
@@ -63,4 +63,5 @@ class DrawingPad {
     }
 }
 
-DrawingPad.main();
+new DrawingPad('canvas-1');
+new DrawingPad('canvas-2');
