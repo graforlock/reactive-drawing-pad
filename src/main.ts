@@ -1,8 +1,10 @@
 import {Stream, Transaction, CellLoop} from 'sodiumjs';
+
 import sCursor from './elements/s-cursor/index';
-import Coords from './interfaces/coords';
-import pageXY from './interfaces/xy';
+
+import {Coords, pageXY} from './interfaces';
 import Drawing from './enums/drawing';
+
 
 class DrawingPad {
     private toXY(stream: {a: MouseEvent, b: Drawing}): pageXY
@@ -19,7 +21,7 @@ class DrawingPad {
     constructor(canvasId: string = 'trigger',
                 initial : Coords = {x0: 0, y0: 0, x1: 0, y1: 0})
     {
-        Transaction.run(() => {
+        Transaction.run(() : void => {
 
             const canvas: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById(canvasId);
             const mouseDown : sCursor = new sCursor('mousedown', canvas),
@@ -35,21 +37,22 @@ class DrawingPad {
                   .snapshot(sToggleDraw.hold(Drawing.END), (a: MouseEvent, b: Drawing) => ({a, b}))
                   .map(this.toXY);
 
-            const cLoop = new CellLoop();
-            const sLines = sDelta.snapshot(cLoop, (e: MouseEvent, previous: Coords) => {
-                let x = e.x - canvas.offsetLeft,
-                    y = e.y - canvas.offsetTop;
-                return {
-                    x0: previous.x1,
-                    y0: previous.y1,
-                    x1: x,
-                    y1: y
-                };
-            });
+            const cLoop: CellLoop<Coords> = new CellLoop<Coords>(),
+                  sLines: Stream<Coords> = sDelta
+                      .snapshot(cLoop, (e: MouseEvent, previous: Coords): Coords => {
+                            let x: number = e.x - canvas.offsetLeft,
+                                y: number = e.y - canvas.offsetTop;
+                            return {
+                                x0: previous.x1,
+                                y0: previous.y1,
+                                x1: x,
+                                y1: y
+                            };
+                    });
 
             cLoop.loop(sLines.hold(initial));
 
-            sLines.listen((coords) => {
+            sLines.listen((coords: Coords): void => {
                 let ctx = canvas.getContext('2d');
                 ctx.beginPath();
                 ctx.lineJoin = "round";

@@ -1,6 +1,8 @@
 import Drawing from '../enums/drawing';
 
-export interface Accum {
+interface Accum {
     a: MouseEvent,
     b: Drawing
 }
+
+export default Accum;
