@@ -1,5 +1,5 @@
 import {Stream, Transaction, CellLoop} from 'sodiumjs';
-import sCursor from './s-cursor/index';
+import sCursor from './elements/s-cursor/index';
 import Coords from './interfaces/coords';
 import pageXY from './interfaces/xy';
 import Drawing from './enums/drawing';
