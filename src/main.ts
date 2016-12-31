@@ -1,9 +1,9 @@
 import {Stream, Transaction, Cell, CellLoop, StreamSink} from 'sodiumjs';
 
-import sCursor from './elements/s-cursor/index';
-import sColorPicker from './elements/s-color-picker/index';
-import Line from './elements/line/index';
-import Canvas from './elements/canvas/index';
+import sCursor from './elements/s-cursor';
+import sColorPicker from './elements/s-color-picker';
+import Line from './elements/line';
+import Canvas from './elements/canvas';
 
 import {Coords, pageXY} from './interfaces';
 import Drawing from './enums/drawing';
