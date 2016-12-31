@@ -63,7 +63,7 @@ class DrawingPad {
 
             /**
              *  Mouse mode is being accumulated together with
-             *  mouse over page coordinates. It is then mapped
+             *  'mouseover' page coordinates. It is then mapped
              *  to a compatible format via .toXY() method.
              */
             const sDelta: Stream<pageXY> = sMouseOver
