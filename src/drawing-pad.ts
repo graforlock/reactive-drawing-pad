@@ -1,7 +1,7 @@
 import {Stream, Transaction, Cell, CellLoop, StreamSink} from 'sodiumjs';
 
 import sCursor from './elements/s-cursor';
-import sColorPicker from './elements/s-color-picker';
+import sInput from './elements/s-input';
 import Line from './elements/line';
 import Canvas from './elements/canvas';
 
@@ -28,7 +28,8 @@ class DrawingPad {
 
             const canvasParentNode: HTMLElement = document.getElementById(canvasId),
                   canvas: Canvas = new Canvas(canvasParentNode),
-                  colorPicker: sColorPicker = new sColorPicker(canvasParentNode);
+                  sColorPicker: sInput<string> = new sInput<string>('color', '#00000',canvasParentNode),
+                  sRange: sInput<number> = new sInput<number>('range', 1, canvasParentNode);
 
             const mouseDown : sCursor = new sCursor('mousedown', canvas.getNode()),
                   mouseUp   : sCursor = new sCursor('mouseup'),
@@ -58,7 +59,7 @@ class DrawingPad {
 
             cLoop.loop(sLines.hold(initial));
 
-            sLines.listen((coords: Coords): Line => new Line(canvas, coords, colorPicker.sColor));
+            sLines.listen((coords: Coords): Line => new Line(canvas, coords, sColorPicker.sValue, sRange.sValue));
         });
     }
 }
