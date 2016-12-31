@@ -27,12 +27,25 @@ class DrawingPad {
     {
         Transaction.run(() : void => {
 
+            /**
+             *  General Canvas setup.
+             *  A node selection followed by Canvas class
+             *  instantiation.
+             */
             const canvasParentNode: HTMLElement = document.getElementById(canvasId),
                   canvas          : Canvas      = new Canvas(canvasParentNode, dimensions);
 
+             /**
+              *  Input elements exposing a listenable stream.
+              *  Both mounted to the canvasParent for convenience.
+              */
             const sColorPicker: sInput<string> = new sInput<string>('color', '#00000',canvasParentNode),
                   sRange      : sInput<number> = new sInput<number>('range', 1, canvasParentNode);
 
+            /**
+             *  Mouse events exposing listenable streams, followed by
+             *  the respective mappings of each MouseEvent.
+             */
             const mouseDown : sCursor = new sCursor('mousedown', canvas.getNode()),
                   mouseUp   : sCursor = new sCursor('mouseup'),
                   mouseOver : sCursor = new sCursor('mousemove'),
@@ -40,12 +53,28 @@ class DrawingPad {
                   sMouseUp  : Stream<Drawing> = mouseUp.sEventSink.map(u => Drawing.END),
                   sMouseOver: Stream<Event>   = mouseOver.sEventSink.map(event => event);
 
+            /**
+             *  Stream of Mouse events that toggle drawing mode
+             *  either by 'mousedown' or 'mouseup'.
+             */
             const sToggleDraw: Stream<Drawing> = sMouseUp.orElse(sMouseDown);
 
+            /**
+             *  Mouse mode is being accumulated together with
+             *  mouse over page coordinates. It is then mapped
+             *  to a compatible format via .toXY() method.
+             */
             const sDelta: Stream<pageXY> = sMouseOver
                   .snapshot(sToggleDraw.hold(Drawing.END), (a: MouseEvent, b: Drawing) => ({a, b}))
                   .map(this.toXY);
 
+            /**
+             *  Cell value is being looped in a transactional fashion.
+             *  Coordinates are converted to acceptable canvas format.
+             *  Results in accumulating MouseEvent's current values with
+             *  previous values in order to allow drawing a canvas line
+             *  on demand (click and drag).
+             */
             const coordsLoop: CellLoop<Coords> = new CellLoop<Coords>(),
                   sLines: Stream<Coords> = sDelta
                       .snapshot(coordsLoop, (e: MouseEvent, previous: Coords): Coords => {
@@ -58,9 +87,18 @@ class DrawingPad {
                                 y1: y
                             };
                     });
-
+            /**
+             * Start value of the looped Cell is set.
+             * Lines stream is converted into the Cell with
+             * initial value.
+             */
             coordsLoop.loop(sLines.hold(initial));
 
+            /**
+             * Listening to the latest value of the line
+             * coordinates stream. Then, the Line class is created
+             * that draws the drawing onto the canvas.
+             */
             sLines.listen((coords: Coords): Line => new Line(canvas, coords, sColorPicker.sValue, sRange.sValue));
         });
     }
