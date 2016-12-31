@@ -26,18 +26,6 @@ class DrawingPad {
     {
         Transaction.run(() : void => {
 
-            /*
-             [ Example ]
-
-                 const test: Cell<any> = new Cell<any>(5),
-                       sTest: StreamSink<any> = new StreamSink<any>();
-
-                 setTimeout(() => sTest.send(10), 1000);
-
-                 const res: Cell<any> = test.lift(sTest.hold(0), (a, b) => a + b);
-                       res.listen(v => console.log(v));
-             */
-
             const colorPicker: sColorPicker = new sColorPicker();
 
             const canvasParentNode: HTMLElement = document.getElementById(canvasId),
