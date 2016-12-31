@@ -1,6 +1,6 @@
-import Accum from './accum';
+import Dimensions from './dimensions';
 import Coords from './coords';
 import pageXY from './xy';
 import Shape from './shape';
 
-export  { Accum, Coords, pageXY, Shape };
+export  { Dimensions, Coords, pageXY, Shape };

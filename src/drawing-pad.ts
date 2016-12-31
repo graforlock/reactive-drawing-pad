@@ -5,7 +5,7 @@ import sInput from './elements/s-input';
 import Line from './elements/line';
 import Canvas from './elements/canvas';
 
-import {Coords, pageXY} from './interfaces';
+import {Coords, pageXY, Dimensions} from './interfaces';
 import Drawing from './enums/drawing';
 
 
@@ -22,12 +22,13 @@ class DrawingPad {
         }
     }
     constructor(canvasId: string = 'trigger',
+                dimensions: Dimensions = {height: 300, width: 200 },
                 initial : Coords = {x0: 0, y0: 0, x1: 0, y1: 0})
     {
         Transaction.run(() : void => {
 
             const canvasParentNode: HTMLElement = document.getElementById(canvasId),
-                  canvas: Canvas = new Canvas(canvasParentNode),
+                  canvas: Canvas = new Canvas(canvasParentNode, dimensions),
                   sColorPicker: sInput<string> = new sInput<string>('color', '#00000',canvasParentNode),
                   sRange: sInput<number> = new sInput<number>('range', 1, canvasParentNode);
 

@@ -1,11 +1,13 @@
+import { Dimensions } from '../../interfaces';
+
 class Canvas
 {
     private node: HTMLCanvasElement = document.createElement('canvas');
 
-    constructor(DOMNode: HTMLElement, height: number = 300, width: number = 200)
+    constructor(DOMNode: HTMLElement, dimensions: Dimensions)
     {
-        this.node.height = height;
-        this.node.width = width;
+        this.node.height = dimensions.height;
+        this.node.width = dimensions.width;
 
         this.render(DOMNode);
     }
