@@ -2,5 +2,6 @@
 src/**/*.js
 node_modules
 dist/**/*.js
+dist/**/*.js.map
 dist/**/*.ts
 DS_Store
