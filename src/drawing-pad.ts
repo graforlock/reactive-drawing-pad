@@ -1,4 +1,4 @@
-import {Stream, Transaction, Cell, CellLoop, StreamSink} from 'sodiumjs';
+import {Stream, Transaction, CellLoop} from 'sodiumjs';
 
 import sCursor from './elements/s-cursor';
 import sInput from './elements/s-input';
@@ -9,7 +9,8 @@ import {Coords, pageXY, Dimensions} from './interfaces';
 import Drawing from './enums/drawing';
 
 
-class DrawingPad {
+class DrawingPad
+{
     /**
      *  Converts MouseEvent into the valid / acceptable
      *  pageXY type data.
