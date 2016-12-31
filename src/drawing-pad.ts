@@ -28,8 +28,7 @@ class DrawingPad {
         Transaction.run(() : void => {
 
             /**
-             *  General Canvas setup. A node selection is
-             *  followed by Canvas class instantiation.
+             *  General Canvas setup placement.
              */
             const canvasParentNode: HTMLElement = document.getElementById(canvasId),
                   canvas          : Canvas      = new Canvas(canvasParentNode, dimensions);
