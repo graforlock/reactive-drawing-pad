@@ -71,8 +71,8 @@ class DrawingPad {
                   .map(this.toXY);
 
             /**
-             *  Cell value is being looped in a transactional fashion.
-             *  Coordinates are converted to acceptable canvas format.
+             *  Cell value is prepared to being looped in a transactional
+             *  fashion. Coordinates are converted to acceptable canvas format.
              *  Results in accumulating MouseEvent's current values with
              *  previous values in order to allow drawing a canvas line
              *  on demand (click and drag).
