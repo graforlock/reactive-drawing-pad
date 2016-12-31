@@ -97,9 +97,9 @@ class DrawingPad {
             coordsLoop.loop(sLines.hold(initial));
 
             /**
-             * Listening to the latest value of the line
-             * coordinates stream. Then, the Line class is created
-             * that draws the drawing onto the canvas.
+             * Listening to the latest value of the line coordinate
+             * stream. Afterwards, the Line class is created that
+             * physically draws the lines onto the canvas.
              */
             sLines.listen((coords: Coords): Line => new Line(canvas, coords, sColorPicker.sValue, sRange.sValue));
         });
