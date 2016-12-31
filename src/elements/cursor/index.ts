@@ -11,8 +11,8 @@ export default class Cursor
         this.handler = handler;
     }
 
-    protected addEvent = () => this.context.addEventListener(this.eventType, this.handler);
-    protected setEvent(eventType: string)
+    protected addEvent = (): void  => this.context.addEventListener(this.eventType, this.handler);
+    protected setEvent(eventType: string): void
     {
         this.eventType = eventType;
     }

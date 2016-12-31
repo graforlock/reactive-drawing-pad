@@ -1,7 +1,7 @@
 import { StreamSink } from 'sodiumjs';
 import Cursor from '../cursor';
 
-export default class sCursor extends Cursor
+class sCursor extends Cursor
 {
     public sEventSink: StreamSink<Event>;
 
@@ -17,3 +17,5 @@ export default class sCursor extends Cursor
         this.addEvent();
     }
 }
+
+export default sCursor;

@@ -25,7 +25,7 @@ class Line implements Shape
         this.draw();
     }
 
-    private draw() :void
+    private draw(): void
     {
         this.ctx.beginPath();
         this.ctx.lineJoin = this.lineJoin;

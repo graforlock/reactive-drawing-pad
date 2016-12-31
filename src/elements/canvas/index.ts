@@ -12,12 +12,12 @@ class Canvas
         this.render(DOMNode);
     }
 
-    public getCtx()
+    public getCtx(): CanvasRenderingContext2D
     {
         return this.node.getContext('2d');
     }
 
-    public getNode()
+    public getNode(): HTMLCanvasElement
     {
         return this.node;
     }
