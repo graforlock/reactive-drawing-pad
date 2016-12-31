@@ -20,7 +20,6 @@ class Canvas
         return this.node;
     }
 
-
     private render(DOMNode: HTMLElement = document.body) :void
     {
         DOMNode.appendChild(this.node);
