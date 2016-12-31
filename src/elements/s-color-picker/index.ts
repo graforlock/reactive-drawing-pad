@@ -6,12 +6,13 @@ class sColorPicker
 
     public sColor: Cell<string>;
 
-    constructor(initColor: string = '#000000',
+    constructor(DOMNode: HTMLElement,
+                initColor: string = '#000000',
                 sSink: StreamSink<string> = new StreamSink<string>())
     {
         this.sColor = sSink.hold(initColor);
         this.setEventHandler(sSink);
-        this.render();
+        this.render(DOMNode);
     }
 
     private setEventHandler(sSink: StreamSink<string>): void

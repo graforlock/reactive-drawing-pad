@@ -26,10 +26,9 @@ class DrawingPad {
     {
         Transaction.run(() : void => {
 
-            const colorPicker: sColorPicker = new sColorPicker();
-
             const canvasParentNode: HTMLElement = document.getElementById(canvasId),
-                  canvas: Canvas = new Canvas(canvasParentNode);
+                  canvas: Canvas = new Canvas(canvasParentNode),
+                  colorPicker: sColorPicker = new sColorPicker(canvasParentNode);
 
             const mouseDown : sCursor = new sCursor('mousedown', canvas.getNode()),
                   mouseUp   : sCursor = new sCursor('mouseup'),

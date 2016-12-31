@@ -7,18 +7,33 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
+        .canvas-container {
+            margin: 13px;
+            display: inline-block
+        }
         canvas {
+            border: 1px solid black;
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
         }
+        input {
+            width: 50%;
+            max-width: 50px;
+            margin: 13px 0;
+            display: block;
+            right: 0;
+            bottom: 0;
+        }
     </style>
 </head>
 <body style="font-size: 0">
 
-<div id="canvas-1" style="border: 1px solid black;display: inline-block"></div>
-<div id="canvas-2" style="border: 1px solid black;display: inline-block"></div>
+<div id="canvas-1" class="canvas-container"></div>
+<div id="canvas-2" class="canvas-container"></div>
+<div id="canvas-3" class="canvas-container"></div>
+
 <script src="bundle.js"></script>
 </body>
 </html>
