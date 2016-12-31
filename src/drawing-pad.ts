@@ -10,12 +10,17 @@ import Drawing from './enums/drawing';
 
 
 class DrawingPad {
+    /**
+     *  Converts MouseEvent into the valid / acceptable
+     *  pageXY type data.
+     */
     private toXY(stream: {a: MouseEvent, b: Drawing}): pageXY
     {
         let {a, b} = stream;
         switch (b)
         {
             case Drawing.END:
+                /* NaN is guaranteed not to draw on the canvas. */
                 return {x: NaN, y: NaN};
             case Drawing.START:
                 return {x: a.pageX, y: a.pageY};
