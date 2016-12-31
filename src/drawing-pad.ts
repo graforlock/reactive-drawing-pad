@@ -26,7 +26,7 @@ class DrawingPad {
                 initial : Coords = {x0: 0, y0: 0, x1: 0, y1: 0})
     {
         /**
-         *  Transaction value processing initialisation.
+         *  Transactional value processing initialisation.
          */
         Transaction.run(() : void => {
 
