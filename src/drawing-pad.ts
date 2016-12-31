@@ -45,9 +45,9 @@ class DrawingPad {
                   .snapshot(sToggleDraw.hold(Drawing.END), (a: MouseEvent, b: Drawing) => ({a, b}))
                   .map(this.toXY);
 
-            const cLoop: CellLoop<Coords> = new CellLoop<Coords>(),
+            const coordsLoop: CellLoop<Coords> = new CellLoop<Coords>(),
                   sLines: Stream<Coords> = sDelta
-                      .snapshot(cLoop, (e: MouseEvent, previous: Coords): Coords => {
+                      .snapshot(coordsLoop, (e: MouseEvent, previous: Coords): Coords => {
                             let x: number = e.x - canvas.getNode().offsetLeft,
                                 y: number = e.y - canvas.getNode().offsetTop;
                             return {
@@ -58,7 +58,7 @@ class DrawingPad {
                             };
                     });
 
-            cLoop.loop(sLines.hold(initial));
+            coordsLoop.loop(sLines.hold(initial));
 
             sLines.listen((coords: Coords): Line => new Line(canvas, coords, sColorPicker.sValue, sRange.sValue));
         });
