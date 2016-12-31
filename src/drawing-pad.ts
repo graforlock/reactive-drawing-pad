@@ -28,9 +28,10 @@ class DrawingPad {
         Transaction.run(() : void => {
 
             const canvasParentNode: HTMLElement = document.getElementById(canvasId),
-                  canvas: Canvas = new Canvas(canvasParentNode, dimensions),
-                  sColorPicker: sInput<string> = new sInput<string>('color', '#00000',canvasParentNode),
-                  sRange: sInput<number> = new sInput<number>('range', 1, canvasParentNode);
+                  canvas          : Canvas      = new Canvas(canvasParentNode, dimensions);
+
+            const sColorPicker: sInput<string> = new sInput<string>('color', '#00000',canvasParentNode),
+                  sRange      : sInput<number> = new sInput<number>('range', 1, canvasParentNode);
 
             const mouseDown : sCursor = new sCursor('mousedown', canvas.getNode()),
                   mouseUp   : sCursor = new sCursor('mouseup'),
@@ -39,7 +40,7 @@ class DrawingPad {
                   sMouseUp  : Stream<Drawing> = mouseUp.sEventSink.map(u => Drawing.END),
                   sMouseOver: Stream<Event>   = mouseOver.sEventSink.map(event => event);
 
-            const sToggleDraw: Stream<Drawing|Event> = sMouseUp.orElse(sMouseDown);
+            const sToggleDraw: Stream<Drawing> = sMouseUp.orElse(sMouseDown);
 
             const sDelta: Stream<pageXY> = sMouseOver
                   .snapshot(sToggleDraw.hold(Drawing.END), (a: MouseEvent, b: Drawing) => ({a, b}))
