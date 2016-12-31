@@ -31,7 +31,6 @@ class DrawingPad {
             const canvasParentNode: HTMLElement = document.getElementById(canvasId),
                   canvas: Canvas = new Canvas(canvasParentNode);
 
-
             const mouseDown : sCursor = new sCursor('mousedown', canvas.getNode()),
                   mouseUp   : sCursor = new sCursor('mouseup'),
                   mouseOver : sCursor = new sCursor('mousemove'),
