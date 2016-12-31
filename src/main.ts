@@ -59,7 +59,7 @@ class DrawingPad {
 
             cLoop.loop(sLines.hold(initial));
 
-            sLines.listen((coords: Coords): Line => new Line(canvas, coords));
+            sLines.listen((coords: Coords): Line => new Line(canvas, coords, colorPicker.sColor));
 
         });
     }
