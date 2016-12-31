@@ -1,6 +1,9 @@
-import {Stream, Transaction, CellLoop} from 'sodiumjs';
+import {Stream, Transaction, Cell, CellLoop, StreamSink} from 'sodiumjs';
 
 import sCursor from './elements/s-cursor/index';
+import sColorPicker from './elements/s-color-picker/index';
+import Line from './elements/line/index';
+import Canvas from './elements/canvas/index';
 
 import {Coords, pageXY} from './interfaces';
 import Drawing from './enums/drawing';
@@ -23,8 +26,25 @@ class DrawingPad {
     {
         Transaction.run(() : void => {
 
-            const canvas: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById(canvasId);
-            const mouseDown : sCursor = new sCursor('mousedown', canvas),
+            /*
+             [ Example ]
+
+                 const test: Cell<any> = new Cell<any>(5),
+                       sTest: StreamSink<any> = new StreamSink<any>();
+
+                 setTimeout(() => sTest.send(10), 1000);
+
+                 const res: Cell<any> = test.lift(sTest.hold(0), (a, b) => a + b);
+                       res.listen(v => console.log(v));
+             */
+
+            const colorPicker: sColorPicker = new sColorPicker();
+
+            const canvasParentNode: HTMLElement = document.getElementById(canvasId),
+                  canvas: Canvas = new Canvas(canvasParentNode);
+
+
+            const mouseDown : sCursor = new sCursor('mousedown', canvas.getNode()),
                   mouseUp   : sCursor = new sCursor('mouseup'),
                   mouseOver : sCursor = new sCursor('mousemove'),
                   sMouseDown: Stream<Drawing> = mouseDown.sEventSink.map(u => Drawing.START),
@@ -40,8 +60,8 @@ class DrawingPad {
             const cLoop: CellLoop<Coords> = new CellLoop<Coords>(),
                   sLines: Stream<Coords> = sDelta
                       .snapshot(cLoop, (e: MouseEvent, previous: Coords): Coords => {
-                            let x: number = e.x - canvas.offsetLeft,
-                                y: number = e.y - canvas.offsetTop;
+                            let x: number = e.x - canvas.getNode().offsetLeft,
+                                y: number = e.y - canvas.getNode().offsetTop;
                             return {
                                 x0: previous.x1,
                                 y0: previous.y1,
@@ -53,13 +73,9 @@ class DrawingPad {
             cLoop.loop(sLines.hold(initial));
 
             sLines.listen((coords: Coords): void => {
-                let ctx = canvas.getContext('2d');
-                ctx.beginPath();
-                ctx.lineJoin = "round";
-                ctx.moveTo(coords.x0, coords.y0);
-                ctx.lineTo(coords.x1, coords.y1);
-                ctx.closePath();
-                ctx.stroke();
+
+                new Line(canvas, coords);
+                //--> colorPicker.sColor.listen((value: any) => ctx.strokeStyle = value);
             });
 
         });
