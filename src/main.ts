@@ -42,8 +42,10 @@ class DrawingApp {
             );
         });
 
-        this.state.listen((drawingPads: NTuple2<Dimensions, Hash>[]): void => {
-            drawingPads.forEach((drawingPad: Tuple2<Dimensions, Hash>, index: number): void => {
+        this.state.listen((drawingPads: NTuple2<Dimensions, Hash>[]): void =>
+        {
+            drawingPads.forEach((drawingPad: Tuple2<Dimensions, Hash>, index: number): void =>
+            {
                 // Instantiate drawing pads
             })
         });
