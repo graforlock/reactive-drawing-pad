@@ -15,7 +15,7 @@ class sSubmit extends sInput<string>
     protected setEventHandler(): void
     {
         this.node
-            .addEventListener('click', (event: any) => this.sSink.send(this.sValue.sample()));
+            .addEventListener('click', (event: any) => this.sSink.send(this.value.sample()));
     }
 }
 

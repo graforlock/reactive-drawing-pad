@@ -106,7 +106,7 @@ class DrawingPad
              * stream. Afterwards, the Line class is created that
              * physically draws the lines onto the canvas.
              */
-            sLines.listen((coords: Coords): Line => new Line(canvas, coords, sColorPicker.sValue, sRange.sValue));
+            sLines.listen((coords: Coords): Line => new Line(canvas, coords, sColorPicker.value, sRange.value));
         });
     }
 }

@@ -8,7 +8,7 @@ class sInput<T> extends Element
 
     protected node: HTMLInputElement;
 
-    public sValue: Cell<T>;
+    public value: Cell<T>;
 
     constructor(inputType: string,
                 initValue: T,
@@ -17,7 +17,7 @@ class sInput<T> extends Element
     {
         super('input', DOMNode);
         this.inputType = inputType;
-        this.sValue = sSink.hold(initValue);
+        this.value = sSink.hold(initValue);
         this.setEventHandler(sSink);
         this.setType();
     }
@@ -31,7 +31,7 @@ class sInput<T> extends Element
     private setType(): void
     {
         this.node.type = this.inputType;
-        this.node.value = String(this.sValue.sample());
+        this.node.value = String(this.value.sample());
     }
 }
 

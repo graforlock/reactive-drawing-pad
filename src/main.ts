@@ -14,8 +14,8 @@ class DrawingApp
               sWidthInput : sInput<number> = new sInput<number>('number', 300, DOMNode),
               sButton     : sSubmit = new sSubmit('Create new canvas', DOMNode);
 
-        const height: Cell<number> = sHeightInput.sValue.map(value => Number(value)),
-              width : Cell<number> = sWidthInput.sValue.map(value => Number(value));
+        const height: Cell<number> = sHeightInput.value.map(value => Number(value)),
+              width : Cell<number> = sWidthInput.value.map(value => Number(value));
 
         const sHeight: Stream<NTuple2> = Cell.switchS(height.map(v => sButton.sSink.map(() => v))),
               sWidth: Stream<NTuple2> = Cell.switchS(width.map(v => sButton.sSink.map(() => v)));
