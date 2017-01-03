@@ -11,10 +11,12 @@ import {Cell, Stream, Tuple2, StreamLoop, Transaction} from 'sodiumjs';
 type NTuple2<T, A> = number | Tuple2<T, A>;
 type Hash = string;
 
-class DrawingApp {
+class DrawingApp
+{
     private static state: StreamLoop<NTuple2<Dimensions, string>[]>;
 
-    public static main(DOMNode: HTMLElement = document.getElementById('controls-container')): void {
+    public static main(DOMNode: HTMLElement = document.getElementById('controls-container')): void
+    {
         Transaction.run((): void => {
             DrawingApp.state = new StreamLoop<Tuple2<Dimensions, Hash>[]>();
 
