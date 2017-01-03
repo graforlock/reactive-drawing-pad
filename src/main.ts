@@ -37,7 +37,8 @@ class DrawingApp {
             DrawingApp.state.loop(
                 sDelta.snapshot(
                     DrawingApp.state.hold([]),
-                    (delta: NTuple2<Dimensions, Hash>, accum: NTuple2<Dimensions, Hash>[]): NTuple2<Dimensions, Hash>[] => R.append(delta, accum))
+                    (delta: NTuple2<Dimensions, Hash>, accum: NTuple2<Dimensions, Hash>[]): NTuple2<Dimensions, Hash>[] =>
+                        R.append(delta, accum))
             );
         });
 
