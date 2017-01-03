@@ -17,7 +17,8 @@ class DrawingApp
 
     public static main(DOMNode: HTMLElement = document.getElementById('controls-container')): void
     {
-        Transaction.run((): void => {
+        Transaction.run((): void =>
+        {
             DrawingApp.state = new StreamLoop<Tuple2<Dimensions, Hash>[]>();
 
             const sHeightInput: sInput<number> = new sInput<number>('number', 200, DOMNode),
