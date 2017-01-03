@@ -20,9 +20,9 @@ class DrawingApp
         const sHeight: Stream<NTuple2> = Cell.switchS(height.map(v => sButton.sSink.map(() => v))),
               sWidth: Stream<NTuple2> = Cell.switchS(width.map(v => sButton.sSink.map(() => v)));
 
-        const merged: Stream<NTuple2> = sHeight
+        const sDelta: Stream<NTuple2> = sHeight
                                 .merge(sWidth, (a: number, b: number): NTuple2 => new Tuple2(a, b));
-              merged.listen((v: any) => console.log(v));
+              sDelta.listen((v: any) => console.log(v));
     }
 }
 
