@@ -22,7 +22,7 @@ class sInput<T> extends Element
         this.setType();
     }
 
-    private setEventHandler(sSink: StreamSink<T>): void
+    protected setEventHandler(sSink: StreamSink<T>): void
     {
         this.node
             .addEventListener('input', (event: any) => sSink.send(event.target.value));

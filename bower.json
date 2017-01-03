@@ -1,0 +1,17 @@
+{
+  "name": "reactive-drawing-pad",
+  "description": "TS Boilerplate",
+  "main": "webpack.config.js",
+  "authors": [
+    "Maciej Sitko <maciej@neatcube.co.uk>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/graforlock/reactive-drawing-pad",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
