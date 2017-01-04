@@ -8,7 +8,6 @@ import sSubmit from './elements/s-submit';
 
 import {Dimensions} from './interfaces';
 
-
 class DrawingApp
 {
     private static state: StreamLoop<Model[]>;
