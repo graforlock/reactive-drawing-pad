@@ -20,16 +20,14 @@ class DrawingApp
             DrawingApp.state = new StreamLoop<Model[]>();
 
             const sHeightInput: sInput<number> = new sInput<number>('number', 200, DOMNode),
-                sWidthInput: sInput<number> = new sInput<number>('number', 300, DOMNode),
-                sButton: sSubmit = new sSubmit('Create new canvas', DOMNode);
+                  sWidthInput: sInput<number> = new sInput<number>('number', 300, DOMNode),
+                  sButton: sSubmit = new sSubmit('Create new canvas', DOMNode);
 
             const height: Cell<number> = sHeightInput.value.map(value => Number(value)),
-                width: Cell<number> = sWidthInput.value.map(value => Number(value));
+                  width: Cell<number> = sWidthInput.value.map(value => Number(value));
 
-            const sHeight: Stream<Model> =
-                    Cell.switchS(height.map(v => sButton.sSink.map(() => v))),
-                sWidth: Stream<Model> =
-                    Cell.switchS(width.map(v => sButton.sSink.map(() => v)));
+            const sHeight: Stream<Model> = Cell.switchS(height.map(v => sButton.sSink.map(() => v))),
+                  sWidth: Stream<Model> = Cell.switchS(width.map(v => sButton.sSink.map(() => v)));
 
             const sDelta: Stream<Model> = sHeight
                 .merge(sWidth, (height: number, width: number): Model =>
@@ -37,8 +35,7 @@ class DrawingApp
 
             DrawingApp.state.loop(
                 sDelta.snapshot(
-                    DrawingApp.state.hold([]),
-                    (delta: Model, accum: Model[]): Model[] =>
+                    DrawingApp.state.hold([]), (delta: Model, accum: Model[]): Model[] =>
                         R.append(delta, accum))
             );
         });
