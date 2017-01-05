@@ -1,16 +1,17 @@
 import * as R from 'ramda';
 import {Cell, Stream, Tuple2, StreamLoop, Transaction} from 'sodiumjs';
-import {Hash, Model} from "../typings";
+import {Model} from "../typings";
 
-import DrawingPad from './drawing-pad';
+import Sockets from './services/sockets';
+
 import sInput from './elements/s-input';
 import sSubmit from './elements/s-submit';
 
-import {Dimensions} from './interfaces';
-
+import {LOCALHOST} from './constants';
 
 class DrawingApp
 {
+    private static socket: Sockets<Model[]> = new Sockets<Model[]>(LOCALHOST);
     private static state: StreamLoop<Model[]>;
 
     public static main(DOMNode: HTMLElement = document.getElementById('controls-container')): void
@@ -42,10 +43,7 @@ class DrawingApp
 
         this.state.listen((drawingPads: Model[]): void =>
         {
-            drawingPads.forEach((drawingPad: Tuple2<Dimensions, Hash>, index: number): void =>
-            {
-                // Instantiate drawing pads
-            })
+            DrawingApp.socket.emit('drawing-pad', drawingPads);
         });
     }
 }

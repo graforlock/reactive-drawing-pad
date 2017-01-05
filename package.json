@@ -2,7 +2,7 @@
   "name": "ts-boilerplate",
   "version": "1.0.0",
   "description": "TS Boilerplate",
-  "main": "webpack.config.js",
+  "main": "index.js",
   "scripts": {
     "start": "webpack --watch",
     "test": "test"
@@ -19,8 +19,18 @@
     "webpack": "^1.13.3"
   },
   "dependencies": {
+    "@types/socket.io": "^1.4.27",
+    "@types/socket.io-client": "^1.4.29",
+    "body-parser": "^1.15.2",
+    "electron": "^1.4.13",
+    "express": "^4.14.0",
+    "jsdom": "^9.9.1",
+    "mustache": "^2.3.0",
+    "phantomjs-prebuilt": "^2.1.14",
     "ramda": "^0.23.0",
+    "socket.io": "^1.7.2",
     "socket.io-client": "^1.7.2",
-    "sodiumjs": "^0.9.1"
+    "sodiumjs": "^0.9.1",
+    "webdriverio": "^4.5.2"
   }
 }

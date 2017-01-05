@@ -1,9 +1,12 @@
 var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 module.exports = {
-    entry: './src/main.ts',
+    entry: {
+        bundle: './src/main.ts',
+        route: './src/route.ts'
+    },
     output: {
-        filename: './dist/bundle.js'
+        filename: './dist/[name].js'
     },
     resolve: {
         extensions: ['', '.ts', '.js']
@@ -19,7 +22,7 @@ module.exports = {
             // ./public directory is being served
             host: 'localhost',
             port: 3000,
-            server: { baseDir: ['./'] }
+            server: { baseDir: ['./dist'] }
         })
     ]
 };
