@@ -6,7 +6,7 @@ module.exports = {
         route: './src/route.ts'
     },
     output: {
-        filename: './dist/[name].js'
+        filename: './dist/views/[name].js'
     },
     resolve: {
         extensions: ['', '.ts', '.js']

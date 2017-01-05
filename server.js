@@ -5,14 +5,14 @@ const express = require('express'),
     fs = require('fs'),
     mustache = require('mustache-express');
 
-app.use('/', express.static('./dist'));
+app.use('/', express.static('./dist/views'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.engine('html', mustache());
 app.set('view engine', 'mustache');
-app.set('views', __dirname + '/dist');
+app.set('views', __dirname + '/dist/views');
 
 app.get('/drawing-pad/:width/:height', function (req, res)
 {
