@@ -11,7 +11,7 @@ import {LOCALHOST} from './constants';
 
 class DrawingApp
 {
-    private static socket: Sockets<Model[]> = new Sockets<Model[]>(LOCALHOST);
+    private static socket: Sockets<Model> = new Sockets<Model>(LOCALHOST);
     private static state: StreamLoop<Model[]>;
 
     public static main(DOMNode: HTMLElement = document.getElementById('controls-container')): void
@@ -32,7 +32,7 @@ class DrawingApp
 
             const sDelta: Stream<Model> = sHeight
                 .merge(sWidth, (height: number, width: number): Model =>
-                    new Tuple2({height, width}, String(Math.random())));
+                    new Tuple2({height, width}, Date.now()));
 
             DrawingApp.state.loop(
                 sDelta.snapshot(
@@ -43,7 +43,7 @@ class DrawingApp
 
         this.state.listen((drawingPads: Model[]): void =>
         {
-            DrawingApp.socket.emit('drawing-pad', drawingPads);
+            DrawingApp.socket.emit('drawing-pad', drawingPads[drawingPads.length - 1]);
         });
     }
 }

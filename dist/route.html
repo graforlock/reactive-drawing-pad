@@ -9,7 +9,10 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <style>
         .canvas-container {
-            margin: 13px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            margin: 0 auto;
             display: inline-block
         }
         canvas {
@@ -58,7 +61,7 @@
 <body style="font-size: 0; text-align: center;">
 
 <div id="container" class="canvas-container"></div>
-
-<script src="route.js"></script>
+<script>window.drawingPad = { height: {{ height }}, width: {{ width }} };</script>
+<script type="text/javascript" src="/route.js"></script>
 </body>
 </html>

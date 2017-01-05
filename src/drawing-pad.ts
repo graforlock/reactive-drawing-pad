@@ -8,7 +8,6 @@ import Canvas from './elements/canvas';
 import {Coords, pageXY, Dimensions} from './interfaces';
 import Drawing from './enums/drawing';
 
-
 class DrawingPad
 {
     /**

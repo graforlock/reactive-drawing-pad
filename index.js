@@ -1,54 +1,39 @@
 const electron = require('electron'),
       app = electron.app,
-      BrowserWindow = electron.BrowserWindow,
-      fs = require('fs');
+      BrowserWindow = electron.BrowserWindow;
 
-const phantomjs = require('phantomjs-prebuilt'),
-      webdriverio = require('webdriverio'),
-      wdOpts = { desiredCapabilities: { browserName: 'phantomjs' } },
-      browser = phantomjs.run('--webdriver=4444');
-
-const mustache = require('mustache');
-
+var win = null;
 const server = require('./server.js'),
     io = server.io,
-    router = server.app,
     LOCALHOST = 'http://localhost:8000';
-
-router.use('/drawing-pad', function (req, res)
-{
-    res.sendFile(__dirname + "/dist/route.html");
-});
-
-io.on('connection', function(socket)
-{
-    socket.on('drawing-pad', function(data)
-    {
-        browser.then(function(program)
-        {
-            webdriverio.remote(wdOpts).init().url(LOCALHOST + '/drawing-pad')
-                .getHTML('body', false)
-                .then(function(html) {
-                    var html = {content: html},
-                        template = fs.readFileSync(__dirname + '/dist/template.html');
-                    var result = mustache.to_html(template, html.content);
-                    console.log(result);
-                });
-        });
-    });
-});
 
 function createWindow()
 {
-    var win = new BrowserWindow({width: 900, height: 700, useContentSize: true});
-        win.loadURL(LOCALHOST);
-
-    win.webContents.openDevTools();
+    win = new BrowserWindow({width: 500, height: 500, useContentSize: true, center: true});
+    win.loadURL(LOCALHOST);
     win.on('closed', function()
     {
         win = null;
     });
 }
+
+io.on('connection', function(socket)
+{
+    socket.on('drawing-pad', function(data)
+    {
+        var win = new BrowserWindow(
+            {
+                width: data.a.width + 2,
+                height: data.a.height + 2,
+                useContentSize: true
+            });
+        win.loadURL(LOCALHOST + '/drawing-pad/'+ data.a.width +'/'+ data.a.height +'/');
+        win.on('closed', function()
+        {
+            win = null;
+        });
+    });
+});
 
 app.on('ready', createWindow);
 
