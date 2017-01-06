@@ -4,8 +4,8 @@
   "description": "TS Boilerplate",
   "main": "index.js",
   "scripts": {
-    "start": "webpack --watch",
-    "test": "test"
+    "build": "npm i && node_modules/.bin/webpack && node_modules/.bin/electron .",
+    "start": "node_modules/.bin/webpack && node_modules/.bin/electron ."
   },
   "author": "",
   "license": "ISC",
@@ -25,14 +25,10 @@
     "body-parser": "^1.15.2",
     "electron": "^1.4.13",
     "express": "^4.14.0",
-    "jsdom": "^9.9.1",
-    "mustache": "^2.3.0",
     "mustache-express": "^1.2.4",
-    "phantomjs-prebuilt": "^2.1.14",
     "ramda": "^0.23.0",
     "socket.io": "^1.7.2",
     "socket.io-client": "^1.7.2",
-    "sodiumjs": "^0.9.1",
-    "webdriverio": "^4.5.2"
+    "sodiumjs": "^0.9.1"
   }
 }
