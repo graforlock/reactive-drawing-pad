@@ -13,16 +13,14 @@ module.exports = {
     },
     module: {
         loaders: [
-            { test: /\.ts$/, loader: 'ts-loader' }
+            { test: /\.ts$/, loader: 'awesome-typescript-loader' }
         ]
     },
     plugins: [
         new BrowserSyncPlugin({
-            // browse to http://localhost:3000/ during development,
-            // ./public directory is being served
             host: 'localhost',
             port: 3000,
-            server: { baseDir: ['./dist'] }
+            server: { baseDir: ['./dist/views'] }
         })
     ]
 };

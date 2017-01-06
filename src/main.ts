@@ -7,7 +7,7 @@ import Sockets from './services/sockets';
 import sInput from './elements/s-input';
 import sSubmit from './elements/s-submit';
 
-import {LOCALHOST} from './constants';
+import {LOCALHOST} from '../constants';
 
 class DrawingApp
 {
