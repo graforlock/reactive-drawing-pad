@@ -1,4 +1,6 @@
-var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+var webpack = require('webpack'),
+    BrowserSyncPlugin = require('browser-sync-webpack-plugin'),
+    UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 
 module.exports = {
     entry: {
@@ -17,6 +19,7 @@ module.exports = {
         ]
     },
     plugins: [
+        new UglifyJsPlugin({ minimize: true }),
         new BrowserSyncPlugin({
             host: 'localhost',
             port: 3000,
