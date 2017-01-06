@@ -1,3 +1,3 @@
 - [ ] - Typescript all server side code
-- [ ] - Scrap express server and make native Electron, so rendered will get access to electron API
+- [ ] - Scrap express server and make native Electron, so rendered browser process will get access to electron API
 - [ ] - Toolboxes should be separate windows IPCing remotely
