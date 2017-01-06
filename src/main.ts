@@ -2,16 +2,15 @@ import * as R from 'ramda';
 import {Cell, Stream, Tuple2, StreamLoop, Transaction} from 'sodiumjs';
 import {Model} from "../typings";
 
-import Sockets from './services/sockets';
 
 import sInput from './elements/s-input';
 import sSubmit from './elements/s-submit';
 
-import {LOCALHOST} from '../constants';
+import {ipcRenderer} from 'electron';
 
 class DrawingApp
 {
-    private static socket: Sockets<Model> = new Sockets<Model>(LOCALHOST);
+
     private static state: StreamLoop<Model[]>;
 
     public static main(DOMNode: HTMLElement = document.getElementById('controls-container')): void
@@ -43,7 +42,7 @@ class DrawingApp
 
         this.state.listen((drawingPads: Model[]): void =>
         {
-            DrawingApp.socket.emit('drawing-pad', drawingPads[drawingPads.length - 1]);
+            ipcRenderer.send('drawing-pad', drawingPads);
         });
     }
 }

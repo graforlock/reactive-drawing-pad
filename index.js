@@ -1,15 +1,11 @@
 const electron = require('electron'),
       app = electron.app,
+      ipc = electron.ipcMain,
       lib = require('./lib');
 
 var win = null;
-const server = require('./server.js'),
-    io = server.io;
 
-io.on('connection', function(socket)
-{
-    socket.on('drawing-pad', lib.createDrawingPad);
-});
+ipc.on('drawing-pad', function(event, payload) { console.log(payload); });
 
 app.on('ready', function() { win = lib.createWindow(); });
 

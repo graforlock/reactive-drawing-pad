@@ -18,6 +18,7 @@ module.exports = {
             { test: /\.ts$/, loader: 'awesome-typescript-loader' }
         ]
     },
+    target: 'electron',
     plugins: [
         new UglifyJsPlugin({ minimize: true }),
         new BrowserSyncPlugin({

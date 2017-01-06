@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "npm i && node_modules/.bin/webpack && node_modules/.bin/electron .",
-    "start": "node_modules/.bin/webpack && node_modules/.bin/electron ."
+    "start": "node_modules/.bin/webpack && node_modules/.bin/electron .",
+    "electron" : "node_modules/.bin/electron .",
+    "js:watch" : "node_modules/.bin/webpack --watch"
   },
   "author": "",
   "license": "ISC",
