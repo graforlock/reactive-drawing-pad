@@ -42,7 +42,7 @@ class DrawingApp
 
         this.state.listen((drawingPads: Model[]): void =>
         {
-            ipcRenderer.send('drawing-pad', drawingPads);
+            ipcRenderer.send('drawing-pad', drawingPads[drawingPads.length - 1]);
         });
     }
 }

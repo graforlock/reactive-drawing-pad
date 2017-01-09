@@ -5,7 +5,7 @@ const electron = require('electron'),
 
 var win = null;
 
-ipc.on('drawing-pad', function(event, payload) { console.log(payload); });
+ipc.on('drawing-pad', function(event, payload) { lib.createDrawingPad(payload) });
 
 app.on('ready', function() { win = lib.createWindow(); });
 
