@@ -7,6 +7,7 @@ class Route
 {
     private static currentWindow: ExtendedWindow = <ExtendedWindow>remote.getCurrentWindow();
     private static settings: Dimensions = Route.currentWindow.drawingPad;
+    
     public static main(): void
     {
         new DrawingPad('container', Route.settings);

@@ -13,8 +13,6 @@ class DrawingApp
 
     public static main(DOMNode: HTMLElement = document.getElementById('controls-container')): void
     {
-        Transaction.run((): void =>
-        {
             const sHeightInput: sInput<number> = new sInput<number>('number', 200, DOMNode),
                   sWidthInput: sInput<number> = new sInput<number>('number', 300, DOMNode),
                   sButton: sSubmit = new sSubmit('Create new canvas', DOMNode);
@@ -28,7 +26,6 @@ class DrawingApp
             DrawingApp.state = sHeight
                 .merge(sWidth, (height: number, width: number): Model =>
                     new Tuple2({height, width}, Date.now()));
-        });
 
         DrawingApp.state.listen((drawingPad: Model): void =>
         {
